@@ -13,6 +13,9 @@ public class ScrollingObj : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        if (GameManager_.instance.isGameOver == false)
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
     }
 }

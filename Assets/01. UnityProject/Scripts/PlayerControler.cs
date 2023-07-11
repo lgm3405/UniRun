@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerControler : MonoBehaviour
 {
+    public GameObject CoinEffectPrefab;
+
     public AudioClip deathClip;
     public float jumpForce = 700f;
 
@@ -30,16 +32,19 @@ public class PlayerControler : MonoBehaviour
     {
         if (isDead) {  return; }
 
-        if (Input.GetMouseButtonDown(0) && jumpCount < 2)
+        if (Input.GetMouseButtonDown(0) && jumpCount < 3)
         {
             jumpCount += 1;
             playerRigid.velocity = Vector2.zero;
             playerRigid.AddForce(new Vector2(0, jumpForce));
             playerAudio.Play();
+
+            GameObject coineffect = Instantiate(CoinEffectPrefab, transform.position, transform.rotation);
+            Destroy(coineffect.gameObject, 0.5f);
         }
         else if (Input.GetMouseButtonDown(0) && 0 < playerRigid.velocity.y)
         {
-            playerRigid.velocity = playerRigid.velocity * 0.5f;
+            playerRigid.velocity = playerRigid.velocity * 1f;
         }
 
         animator.SetBool("Ground", isGrounded);
@@ -53,6 +58,8 @@ public class PlayerControler : MonoBehaviour
 
         playerRigid.velocity = Vector2.zero;
         isDead = true;
+
+        GameManager_.instance.OnPlayerDead();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,6 +67,11 @@ public class PlayerControler : MonoBehaviour
         if (collision.tag.Equals("Dead") && isDead == false)
         {
             Die();
+        }
+        if (collision.tag.Equals("Coin") && isDead == false)
+        {
+            GameManager_.instance.AddCoin(1);
+            collision.gameObject.SetActive(false);
         }
     }
 

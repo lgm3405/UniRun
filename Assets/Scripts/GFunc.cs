@@ -38,10 +38,43 @@ public static partial class GFunc
         SceneManager.LoadScene(sceneName);
     }
 
+    // 현재 씬의 이름을 리턴한다.
+    public static string GetActiveSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
+
     public static Vector2 AddVector(this Vector3 origin, Vector2 addvector)
     {
         Vector2 result = new Vector2(origin.x, origin.y);
         result += addvector;
         return result;
     }
+
+    [System.Diagnostics.Conditional("DEBUG_MODE")]
+    public static void LogWarning(object message)
+    {
+#if DEBUG_MODE
+        Debug.LogWarning(message);
+#endif
+    }
+
+    // 컴포넌트가 존재하는지 여부를 체크하는 함수
+    public static bool isValid<T>(this T target) where T : Component
+    {
+        if (target == null || target == default) { return false; }
+        else { return true; }
+    }
+
+    // 리스트가 존재하는지 여부를 체크하는 함수
+    public static bool isValid<T>(this List<T> target)
+    {
+        bool isInValid = (target == null || target == default);
+        isInValid = isInValid || target.Count == 0;
+
+        if (isInValid == true) { return false; }
+        else { return true; }
+    }
+
+
 }
