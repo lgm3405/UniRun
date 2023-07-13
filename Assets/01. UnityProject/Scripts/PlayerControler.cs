@@ -34,21 +34,21 @@ public class PlayerControler : MonoBehaviour
 
         // LEGACY:
         //if (Input.GetMouseButtonDown(0) && jumpCount < 3)
-        //{
-        //    jumpCount += 1;
-        //    playerRigid.velocity = Vector2.zero;
-        //    playerRigid.AddForce(new Vector2(0, jumpForce));
-        //    playerAudio.Play();
+            //{
+            //    jumpCount += 1;
+            //    playerRigid.velocity = Vector2.zero;
+            //    playerRigid.AddForce(new Vector2(0, jumpForce));
+            //    playerAudio.Play();
 
-        //    GameObject coineffect = Instantiate(CoinEffectPrefab, transform.position, transform.rotation);
-        //    Destroy(coineffect.gameObject, 0.5f);
-        //}
-        //else if (Input.GetMouseButtonDown(0) && 0 < playerRigid.velocity.y)
-        //{
-        //    playerRigid.velocity = playerRigid.velocity * 1f;
-        //}
+            //    GameObject coineffect = Instantiate(CoinEffectPrefab, transform.position, transform.rotation);
+            //    Destroy(coineffect.gameObject, 0.5f);
+            //}
+            //else if (Input.GetMouseButtonDown(0) && 0 < playerRigid.velocity.y)
+            //{
+            //    playerRigid.velocity = playerRigid.velocity * 1f;
+            //}
 
-        animator.SetBool("Ground", isGrounded);
+            animator.SetBool("Ground", isGrounded);
     }
 
     public void Jump()
