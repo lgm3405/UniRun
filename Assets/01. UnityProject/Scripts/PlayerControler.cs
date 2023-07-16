@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerControler : MonoBehaviour
 {
     public GameObject CoinEffectPrefab;
-
     public AudioClip deathClip;
     public float jumpForce = 700f;
 
